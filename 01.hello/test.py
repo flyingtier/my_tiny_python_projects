@@ -3,8 +3,13 @@
 
 import os
 from subprocess import getstatusoutput, getoutput
+import platform
+
+os_name = platform.system()
 
 prg = './hello.py'
+if os_name == 'Windows':
+    prg = 'hello.py'
 
 
 # --------------------------------------------------
@@ -19,6 +24,8 @@ def test_runnable():
     """Runs using python3"""
 
     out = getoutput(f'python3 {prg}')
+    if os_name == 'Windows':
+        out = getoutput(f'python {prg}')
     assert out.strip() == 'Hello, World!'
 
 
